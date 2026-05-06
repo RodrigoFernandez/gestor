@@ -3,7 +3,6 @@ package com.techlab.articulos.menu;
 import java.util.Scanner;
 
 import com.techlab.articulos.menu.acciones.AccionSalir;
-import com.techlab.articulos.utils.ConsolaUtils;
 
 public class MenuPrincipal extends Menu {
 
@@ -20,16 +19,7 @@ public class MenuPrincipal extends Menu {
 
     @Override
     public void mostrarMenu() {
-
-        do {
-            ConsolaUtils.limpiarConsola();
-            this.listarOpcionesMenu("Menu Principal");
-
-            int opcionId = this.leerOpcion();
-
-            this.ejecutarOpcion(opcionId);
-        } while (this.continuarSolicitandoOpcion);
-        
+        this.mostrarMenu("Menu Principal");
     }
 
     @Override

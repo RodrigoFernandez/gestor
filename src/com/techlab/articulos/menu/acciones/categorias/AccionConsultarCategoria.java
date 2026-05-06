@@ -1,6 +1,7 @@
 package com.techlab.articulos.menu.acciones.categorias;
 
 import com.techlab.articulos.menu.Menu;
+import com.techlab.articulos.menu.acciones.AbstractAccion;
 import com.techlab.articulos.model.Categoria;
 import com.techlab.articulos.utils.ConsolaUtils;
 

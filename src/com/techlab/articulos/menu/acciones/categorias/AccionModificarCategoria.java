@@ -1,8 +1,10 @@
 package com.techlab.articulos.menu.acciones.categorias;
 
 import com.techlab.articulos.menu.Menu;
+import com.techlab.articulos.menu.acciones.AbstractAccion;
 import com.techlab.articulos.model.Categoria;
 import com.techlab.articulos.utils.ConsolaUtils;
+import com.techlab.articulos.utils.Validaciones;
 
 public class AccionModificarCategoria extends AbstractAccion {
 
@@ -11,11 +13,44 @@ public class AccionModificarCategoria extends AbstractAccion {
     }
 
     @Override
-    protected String leerTexto(String mensaje){
-        System.out.print(mensaje);
-        String resultado;
-        resultado = this.menu.getScanner().nextLine();
-        return resultado;
+    protected String leerTexto(String mensaje) {
+        boolean continuoPidiendoIngreso = true;
+        String texto = "";
+
+        do {
+            System.out.print(mensaje);
+            texto = this.getMenu().getScanner().nextLine().trim();
+
+            if(!Validaciones.validarTextoNoVacio(texto)){
+                System.out.println("El texto no puede estar vacío. Por favor, ingrese un valor válido.");
+            } else {
+                continuoPidiendoIngreso = false;
+            }
+        } while (continuoPidiendoIngreso);
+
+        return texto;
+    }
+
+    protected String leerNombre(String mensaje) {
+        boolean continuoPidiendoIngreso = true;
+        String texto = "";
+
+        do {
+            System.out.print(mensaje);
+            texto = this.getMenu().getScanner().nextLine().trim();
+
+            if(!Validaciones.validarTextoNoVacio(texto)){
+                System.out.println("El texto no puede estar vacío. Por favor, ingrese un valor válido.");
+            } else {
+                if(this.getMenu().getRepositorioCategorias().buscarPorNombre(texto) != null){
+                    System.out.println("Ya existe una categoría con ese nombre. Por favor, ingrese un nombre diferente.");
+                } else {
+                    continuoPidiendoIngreso = false;
+                }
+            }
+        } while (continuoPidiendoIngreso);
+
+        return texto;
     }
 
     @Override
@@ -30,9 +65,10 @@ public class AccionModificarCategoria extends AbstractAccion {
         if (categoria != null) {
             System.out.println("\nCategoría encontrada:");            
             System.out.printf("Código: %d%n", categoria.getCodigo());
-            String nombre = this.leerTexto("Nombre (" + categoria.getNombre() + "): ");
+            String nombre = this.leerNombre("Nombre (" + categoria.getNombre() + "): ");
             String descripcion = this.leerTexto("Descripción (" + categoria.getDescripcion() + "): ");
             
+            //Revisar esto
             this.menu.getRepositorioCategorias().eliminar(categoria.getCodigo());
             
             if(!nombre.isEmpty()) {

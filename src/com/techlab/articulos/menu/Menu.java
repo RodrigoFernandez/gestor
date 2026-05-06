@@ -99,43 +99,31 @@ public abstract class Menu {
         return opcion;
     }
 
+    protected void mostrarMenu(String titulo) {
+        do {
+            ConsolaUtils.limpiarConsola();
+            
+            this.listarOpcionesMenu(titulo);
+
+            int opcionId = this.leerOpcion();
+
+            this.ejecutarOpcion(opcionId);
+        } while (this.continuarSolicitandoOpcion);
+    }
+
     protected int leerEntero(String mensaje) {
-        System.out.print(mensaje);
-        while (!scanner.hasNextInt()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número entero.");
-            scanner.nextLine(); // Limpiar la entrada no válida
-            System.out.print(mensaje);
-        }
-        int resultado = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el salto de línea
-        return resultado;
+        return ConsolaUtils.leerEntero(mensaje, this.scanner);
     }
 
     protected double leerDouble(String mensaje){
-        System.out.print(mensaje);
-        while (!scanner.hasNextDouble()) {
-            System.out.println("Entrada no válida. Por favor, ingrese un número decimal.");
-            scanner.nextLine(); // Limpiar la entrada no válida
-            System.out.print(mensaje);
-        }
-        double resultado = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el salto de línea
-        return resultado;
+        return ConsolaUtils.leerDouble(mensaje, this.scanner);
     }
 
     protected String leerTexto(String mensaje){
-        System.out.print(mensaje);
-        return scanner.nextLine();
+        return ConsolaUtils.leerTexto(mensaje, this.scanner);
     }
 
     protected boolean leerSiNo(String mensaje){
-        System.out.print(mensaje + " (s/n): ");
-        String respuesta = scanner.nextLine().trim().toLowerCase();
-        while (!respuesta.equals("s") && !respuesta.equals("n")) {
-            System.out.println("Entrada no válida. Por favor, ingrese 's' para sí o 'n' para no.");
-            System.out.print(mensaje + " (s/n): ");
-            respuesta = scanner.nextLine().trim().toLowerCase();
-        }
-        return respuesta.equals("s");
+        return ConsolaUtils.leerSiNo(mensaje, this.scanner);
     }
 }

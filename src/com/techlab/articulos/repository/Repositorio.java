@@ -26,6 +26,15 @@ public class Repositorio<T extends Identificable> {
         return null;
     }
 
+    public T buscarPorNombre(String nombre) {
+        for (T elemento : lista) {
+            if (elemento.getNombre().equals(nombre)) {
+                return elemento;
+            }
+        }
+        return null;
+    }
+
     public Boolean eliminar(Integer codigo) {
         T elementoAEliminar = buscarPorCodigo(codigo);
         if (elementoAEliminar != null) {

@@ -8,7 +8,6 @@ import com.techlab.articulos.menu.acciones.categorias.AccionEliminarCategoria;
 import com.techlab.articulos.menu.acciones.categorias.AccionIngresarCategoria;
 import com.techlab.articulos.menu.acciones.categorias.AccionListarCategorias;
 import com.techlab.articulos.menu.acciones.categorias.AccionModificarCategoria;
-import com.techlab.articulos.utils.ConsolaUtils;
 
 public class MenuCategorias extends Menu {
 
@@ -24,15 +23,7 @@ public class MenuCategorias extends Menu {
 
     @Override
     public void mostrarMenu() {
-        do {
-            ConsolaUtils.limpiarConsola();
-            
-            this.listarOpcionesMenu("Menu Categorias");
-
-            int opcionId = this.leerOpcion();
-
-            this.ejecutarOpcion(opcionId);
-        } while (this.continuarSolicitandoOpcion);
+        this.mostrarMenu("Menu Categorias");
     }
 
     @Override
